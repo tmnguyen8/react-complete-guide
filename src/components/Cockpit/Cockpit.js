@@ -6,6 +6,21 @@ export default function Cockpit(props) {
     useEffect(()=>{
       console.log('[Cockpit.js] useEffect')
       // HTTP request
+      setTimeout(()=>{
+        alert('Saved data to cloud')
+      }, 1000);
+      return () => {
+        console.log('[Cockpit.js] clean up in useEffect')
+      }
+    }, []) 
+    // [] means it only runs the first time
+    // only run when props.persons is changed [props.persons]
+
+    useEffect(()=>{
+      console.log('[Cockpit.js] 2nd useEffect');
+      return () => {
+        console.log('[Cockpit.js] clean up in 2nd useEffect')
+      }
     })
 
     const assignedClasses = [];

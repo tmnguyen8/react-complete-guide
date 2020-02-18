@@ -17,7 +17,8 @@ constructor(props) {
       { id: 'asdf11', name: 'Stephanie', age: 26 }
     ],
     otherState: 'some other value',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -25,15 +26,18 @@ constructor(props) {
     return state;
   } 
 
- 
-
   componentDidMount() {
     console.log('[App.js] componentDidMount')
   }
 
   shouldComponentUpdate(nextProp, nextState) {
-    console.log('[App.js] shouldComponentUpdate')
-    return true;
+    console.log('[App.js] shouldComponentUpdate');
+    if (nextProp.persons !== this.props.persons) {
+      return true;
+    } else {
+      return false;
+    }
+    
   }
 
   componentDidUpdate() {
@@ -85,12 +89,17 @@ constructor(props) {
 
     return (
       <div className={classes.App}>
-        <Cockpit  
-          title = {this.props.appTitle}
-          showPersons = {this.state.showPersons}
-          persons = {this.state.persons}
-          clicked = {this.togglePersonsHandler}
-        />
+        <button onClick={()=>{this.setState({showCockpit: false})}}>Remove Cockpit</button>
+        {
+          this.state.showCockpit?
+            <Cockpit  
+              title = {this.props.appTitle}
+              showPersons = {this.state.showPersons}
+              persons = {this.state.persons}
+              clicked = {this.togglePersonsHandler}
+            />:
+            null
+        }
         {persons}
       </div>
     );
