@@ -25,8 +25,19 @@ constructor(props) {
     return state;
   } 
 
+ 
+
   componentDidMount() {
     console.log('[App.js] componentDidMount')
+  }
+
+  shouldComponentUpdate(nextProp, nextState) {
+    console.log('[App.js] shouldComponentUpdate')
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate')
   }
 
   nameChangedHandler = ( event, id ) => {
